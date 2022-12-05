@@ -1,7 +1,7 @@
 <template>
 <div  class="login-container"  >
     <el-form ref="form" :model="form"   :rules="rules" class="login-page">
-      <h2 class="title" style="margin-bottom: 20px">系统登陆</h2>
+      <h2 class="title" style="margin-bottom: 20px">图书管理系统登陆</h2>
       <el-form-item prop="username" >
         <el-input v-model="form.username"  clearable>
           <template #prefix>
