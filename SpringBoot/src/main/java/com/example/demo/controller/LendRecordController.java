@@ -60,7 +60,7 @@ public class LendRecordController {
                               @RequestParam(defaultValue = "") String search1,
                               @RequestParam(defaultValue = "") String search2,
                               @RequestParam(defaultValue = "") String search3){
-        LambdaQueryWrapper<LendRecord> wrappers = Wrappers.<LendRecord>lambdaQuery();
+        LambdaQueryWrapper<LendRecord> wrappers = Wrappers.lambdaQuery();
         if(StringUtils.isNotBlank(search1)){
             wrappers.like(LendRecord::getIsbn,search1);
         }
