@@ -71,6 +71,7 @@ public class BookWithUserController {
         if(StringUtils.isNotBlank(search3)){
             wrappers.like(BookWithUser::getId,search3);
         }
+        wrappers.orderByDesc(BookWithUser::getLendtime);   //按借阅时间排序
         Page<BookWithUser> BookPage =BookWithUserMapper.selectPage(new Page<>(pageNum,pageSize), wrappers);
         return Result.success(BookPage);
     }

@@ -46,7 +46,7 @@ public class BookController {
                               @RequestParam(defaultValue = "") String search1,
                               @RequestParam(defaultValue = "") String search2,
                               @RequestParam(defaultValue = "") String search3){
-        LambdaQueryWrapper<Book> wrappers = Wrappers.<Book>lambdaQuery();
+        LambdaQueryWrapper<Book> wrappers = Wrappers.lambdaQuery();
         if(StringUtils.isNotBlank(search1)){
             wrappers.like(Book::getIsbn,search1);
         }
@@ -56,6 +56,7 @@ public class BookController {
         if(StringUtils.isNotBlank(search3)){
             wrappers.like(Book::getAuthor,search3);
         }
+        wrappers.orderByAsc(Book::getCreateTime);    //按出版时间排序
         Page<Book> BookPage =BookMapper.selectPage(new Page<>(pageNum,pageSize), wrappers);
         return Result.success(BookPage);
     }

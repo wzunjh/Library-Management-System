@@ -117,6 +117,7 @@ public class UserController {
             wrappers.like(User::getAddress,search4);
         }
         wrappers.like(User::getRole,2);
+        wrappers.orderByAsc(User::getId);   //按编号排序
         Page<User> userPage =userMapper.selectPage(new Page<>(pageNum,pageSize), wrappers);
         return Result.success(userPage);
     }
