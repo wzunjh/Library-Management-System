@@ -3,14 +3,14 @@
     <el-form ref="form" :model="form"   :rules="rules" class="login-page">
       <h2 class="title" style="margin-bottom: 20px">图书管理系统登陆</h2>
       <el-form-item prop="username" >
-        <el-input v-model="form.username"  clearable>
+        <el-input v-model="form.username"  placeholder="用户名" clearable>
           <template #prefix>
             <el-icon class="el-input__icon"><User /></el-icon>
           </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="form.password"  clearable show-password>
+        <el-input v-model="form.password" placeholder="密码" clearable show-password>
           <template #prefix>
             <el-icon class="el-input__icon"><Lock /></el-icon>
           </template>
@@ -23,9 +23,9 @@
         </div>
       </el-form-item>
       <el-form-item >
-        <el-button type="primary"  style=" width: 100%" @click="login">登 录</el-button>
+        <el-button type="primary"  style=" width: 100%;height: 130%;font-size: 16px" @click="login">登 录</el-button>
       </el-form-item>
-      <el-form-item><el-button type="text" @click="$router.push('/register')">前往注册 >> </el-button></el-form-item>
+      <el-form-item><el-button type="text" style="font-size: 16px;width: 155%" @click="$router.push('/register')">没有账号？前往注册</el-button></el-form-item>
     </el-form>
 </div>
 
@@ -110,11 +110,14 @@ export default {
 }
 .login-page {
   border-radius: 5px;
-  margin: 180px auto;
-  width: 350px;
+  margin: 300px auto;
+  width: 420px;
   padding: 35px 35px 15px;
   background: #fff;
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
+}
+/deep/ .el-input__inner{
+  height: 40px;
 }
 </style>
