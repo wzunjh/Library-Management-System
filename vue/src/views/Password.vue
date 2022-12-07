@@ -16,7 +16,7 @@
               autocomplete="off"
               style="width: 150px"
           ></el-input>
-          <el-button type="success" plain  style="margin-left: 20px" @click="getcode">获取验证码</el-button>
+          <el-button type="success" plain  style="margin-left: 20px" @click="getcode" :disabled="isDisabled">{{buttonName}}</el-button>
           <el-tag type="danger" style="margin-left: 40px">如果修改了手机号请先重新登录</el-tag>
         </el-form-item>
         <el-form-item label="新密码" prop="password">
@@ -67,6 +67,11 @@ export default {
       }
     }
     return {
+
+      buttonName: "获取验证码",
+      isDisabled: false,
+      time: 60,
+
       phone:'',
       form: {
         checkpassword: '',
@@ -92,6 +97,19 @@ export default {
   methods: {
 
     getcode(){
+
+      let me = this;
+      me.isDisabled = true;
+      let interval = window.setInterval(function() {
+        me.buttonName = '（' + me.time + '秒）后重新发送';
+        --me.time;
+        if(me.time < 0) {
+          me.buttonName = "重新发送";
+          me.time = 60;
+          me.isDisabled = false;
+          window.clearInterval(interval);
+        }
+      }, 1000);
       request.get("user/getcode",{
         params:{
           phone:this.phone
