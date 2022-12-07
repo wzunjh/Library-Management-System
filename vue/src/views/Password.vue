@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div>
     <el-card style="width: 40%; margin-left: 120px; margin-top: 40px" >
       <el-form
@@ -14,7 +14,10 @@
               v-model="form2.code"
               type="code"
               autocomplete="off"
+              style="width: 150px"
           ></el-input>
+          <el-button type="success" plain  style="margin-left: 20px" @click="getcode">获取验证码</el-button>
+          <el-tag type="danger" style="margin-left: 40px">如果修改了手机号请先重新登录</el-tag>
         </el-form-item>
         <el-form-item label="新密码" prop="password">
           <el-input
@@ -31,9 +34,8 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary"  style="text-align: center" @click="getcode">获取验证码</el-button>
-          <el-button type="primary" @click="submitForm" style="text-align: center">提交</el-button>
-          <el-button @click="resetForm('form')" style="text-align: center">重置</el-button>
+          <el-button type="primary" @click="submitForm" style="text-align: center;margin-left: 180px">提交</el-button>
+          <el-button @click="resetForm('form')" style="text-align: center;margin-left: 20px">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
