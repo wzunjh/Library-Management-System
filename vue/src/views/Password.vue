@@ -9,10 +9,10 @@
           label-width="100px"
           class="demo-ruleForm"
       >
-        <el-form-item label="老密码" prop="password2">
+        <el-form-item label="验证码" prop="code">
           <el-input
-              v-model="form.password2"
-              type="password"
+              v-model="form2.code"
+              type="code"
               autocomplete="off"
           ></el-input>
         </el-form-item>
@@ -31,6 +31,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
+          <el-button type="primary"  style="text-align: center" @click="getcode">获取验证码</el-button>
           <el-button type="primary" @click="submitForm" style="text-align: center">提交</el-button>
           <el-button @click="resetForm('form')" style="text-align: center">重置</el-button>
         </el-form-item>
@@ -46,23 +47,11 @@ import {ElMessage} from "element-plus";
 export default {
   name: "Password",
   data() {
-    const validatePass2 = (rule, value, callback) => {
-      if (value == '') {
-        callback(new Error('请输入老密码'))
-      } else {
-        if (this.form.password2 !== this.form.truepassword) {
-          callback(new Error('密码错误'))
-        }
-        callback()
-      }
-    }
+
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入新密码'))
       } else {
-        // if (this.form2.password !== '') {
-        //   this.$refs.form.validateField('newPass')
-        // }
         callback()
       }
     }
@@ -76,35 +65,49 @@ export default {
       }
     }
     return {
+      phone:'',
       form: {
-        password2: '',
         checkpassword: '',
-        truepassword:'',
       },
       form2:{
+        phone:'',
+        code: '',
         password:'',
         id:0
       },
       rules: {
         password: [{ validator: validatePass, trigger: 'blur' ,required: true}],
         checkpassword: [{ validator: validatePass3, trigger: 'blur',required: true,}],
-        password2: [{ validator: validatePass2, trigger: 'blur',required: true,}],
       },
     }
   },
   created() {
     let user = JSON.parse(sessionStorage.getItem("user"))
-    this.form.truepassword = user.password
+    this.phone= user.phone
     this.form2.id = user.id
-
+    this.form2.phone = user.phone
   },
   methods: {
+
+    getcode(){
+      request.get("user/getcode",{
+        params:{
+          phone:this.phone
+        }
+      }).then(res=>{
+        if (res.code === 0) {
+          ElMessage.success("验证码发送成功")
+        } else {
+          ElMessage.error(res.msg)
+        }
+      })
+    },
     submitForm() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
 
           request.put("/user", this.form2).then(res => {
-            if (res.code == 0) {
+            if (res.code === 0) {
               ElMessage.success("密码修改成功,请重新登录")
               sessionStorage.removeItem("user")//清空缓存的用户信息
               this.$router.push("/login")//跳转登录界面

@@ -1,25 +1,24 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.LoginUser;
 import com.example.demo.commom.Result;
-import com.example.demo.entity.BookWithUser;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.jdbc.Null;
+import com.example.demo.utils.RegexUtils;
+import com.example.demo.utils.SmsUtils;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.utils.TokenUtils;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -27,6 +26,23 @@ import java.util.Map;
 public class UserController {
     @Resource
     UserMapper userMapper;
+
+
+    @GetMapping("/getcode")
+    public Result<?> getcode(@RequestParam String phone, HttpSession session){
+
+        //校验手机号
+        if (RegexUtils.isPhoneInvalid(phone)) {
+            return Result.error("-1","手机号错误");
+        }
+
+        String code = RandomUtil.randomNumbers(6);  //六位随机验证码
+        session.setAttribute(phone,code); //code存入session
+        SmsUtils.sendSms(phone,code);   //发送验证码
+        System.out.println(code);
+        return Result.success();
+    }
+
     @PostMapping("/register")
     public Result<?> register(@RequestBody User user){
         User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUsername,user.getUsername()));
@@ -70,9 +86,14 @@ public class UserController {
         return Result.success();
     }
     @PutMapping
-    public  Result<?> password(@RequestBody User user){
-        userMapper.updateById(user);
-        return Result.success();
+    public  Result<?> password(@RequestBody User user,HttpSession session){
+        String code = session.getAttribute(user.getPhone()).toString();
+        if (user.getCode().equals(code)){
+            userMapper.updateById(user);
+            session.removeAttribute(user.getPhone()); //移除验证码
+            return Result.success();
+        }
+        return Result.error("-1","验证码错误");
     }
     @PostMapping("/deleteBatch")
     public  Result<?> deleteBatch(@RequestBody List<Integer> ids){
