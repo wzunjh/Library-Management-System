@@ -86,6 +86,9 @@ public class UserController {
     }
     @PutMapping
     public  Result<?> password(@RequestBody User user,HttpSession session){
+        if (session.getAttribute(user.getPhone())==null){
+            return Result.error("-1","请先获取验证码");
+        }
         String code = session.getAttribute(user.getPhone()).toString();
         if (user.getCode().equals(code)){
             userMapper.updateById(user);
