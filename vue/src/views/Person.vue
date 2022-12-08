@@ -14,7 +14,8 @@
             <span v-if="form.role==2" style="margin:5px">读者</span>
         </el-form-item>
         <el-form-item label="电话号码">
-          <el-input style="width: 80%" v-model="form.phone"></el-input>
+          <el-input style="width: 40%" v-model="form.phone"></el-input>
+          <el-tag type="danger" style="margin-left: 40px">如果修改了手机号请先重新登录再使用</el-tag>
         </el-form-item>
         <el-form-item label="性别">
           <div>

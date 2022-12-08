@@ -17,7 +17,6 @@
               style="width: 150px"
           ></el-input>
           <el-button type="success" plain  style="margin-left: 20px" @click="getcode" :disabled="isDisabled">{{buttonName}}</el-button>
-          <el-tag type="danger" style="margin-left: 40px">如果修改了手机号请先重新登录</el-tag>
         </el-form-item>
         <el-form-item label="新密码" prop="password">
           <el-input
