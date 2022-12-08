@@ -34,9 +34,9 @@
     </div>
     <!-- 按钮-->
     <div style="margin: 10px 0;" >
-      <el-popconfirm title="确认删除?" @confirm="deleteBatch" v-if="user.role == 1">
+      <el-popconfirm title="确认禁用?" @confirm="deleteBatch" v-if="user.role == 1">
         <template #reference>
-          <el-button type="danger" size="mini" >批量删除</el-button>
+          <el-button type="danger" size="mini" >批量禁用</el-button>
         </template>
       </el-popconfirm>
     </div>
@@ -55,9 +55,9 @@
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
           <el-button  size="mini" @click ="handleEdit(scope.row)">编辑</el-button>
-          <el-popconfirm title="确认删除?" @confirm="handleDelete(scope.row.id)">
+          <el-popconfirm title="确认禁用?" @confirm="handleDelete(scope.row.id)">
             <template #reference>
-              <el-button type="danger" size="mini" >删除</el-button>
+              <el-button type="danger" size="mini" >禁用</el-button>
             </template>
           </el-popconfirm>
         </template>

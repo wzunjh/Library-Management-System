@@ -75,7 +75,7 @@
           <el-button  size="mini" @click ="handleEdit(scope.row)" v-if="user.role == 1">修改</el-button>
           <el-popconfirm title="确认删除?" @confirm="handleDelete(scope.row.id)" v-if="user.role == 1">
             <template #reference>
-              <el-button type="danger" size="mini" >删除</el-button>
+              <el-button type="danger" size="mini" >下架</el-button>
             </template>
           </el-popconfirm>
           <el-button  size="mini" @click ="handlelend(scope.row.id,scope.row.isbn,scope.row.name,scope.row.borrownum)" v-if="user.role == 2" :disabled="scope.row.status == 0">借阅</el-button>
