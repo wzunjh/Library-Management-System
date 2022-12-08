@@ -63,6 +63,7 @@
       <el-table-column prop="author" label="作者" />
       <el-table-column prop="publisher" label="出版社" />
       <el-table-column prop="createTime" label="出版时间" sortable/>
+      <el-table-column prop="borrownum" label="总借阅次数" sortable/>
       <el-table-column prop="status" label="状态">
         <template v-slot="scope">
           <el-tag v-if="scope.row.status == 0" type="warning">已借阅</el-tag>
