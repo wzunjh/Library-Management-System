@@ -67,7 +67,7 @@ export default {
     }
     return {
 
-      buttonName: "获取验证码",
+      buttonName: "获取短信验证码",
       isDisabled: false,
       time: 60,
 
