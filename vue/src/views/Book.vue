@@ -197,6 +197,8 @@ export default {
   created(){
     let userStr = sessionStorage.getItem("user") ||"{}"
     this.user = JSON.parse(userStr)
+    let user = JSON.parse(sessionStorage.getItem("user"))
+    this.phone= user.phone
     this.load()
   },
   name: 'Book',
@@ -360,6 +362,13 @@ export default {
       // })
     },
     handlelend(id,isbn,name,bn){
+
+      if (this.phone == null){
+        ElMessage.error("借阅失败! 请先将个人信息补充完整")
+        this.$router.push("/person")//跳转个人信息界面
+        return;
+      }
+
       if(this.number ==5){
         ElMessage.warning("您不能再借阅更多的书籍了")
         return;
@@ -479,6 +488,7 @@ export default {
   },
   data() {
     return {
+      phone:'',
       form: {},
       form2:{},
       form3:{},
