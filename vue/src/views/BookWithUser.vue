@@ -29,9 +29,9 @@
     </div>
     <!-- 按钮-->
     <div style="margin: 10px 0;" >
-      <el-popconfirm title="确认删除?" @confirm="deleteBatch" v-if="user.role == 1">
+      <el-popconfirm title="确认归还?" @confirm="deleteBatch" v-if="user.role == 1">
         <template #reference>
-          <el-button type="danger" size="mini" >批量删除</el-button>
+          <el-button type="danger" size="mini" >批量归还</el-button>
         </template>
       </el-popconfirm>
     </div>
@@ -50,9 +50,9 @@
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
           <el-button  size="mini" @click ="handleEdit(scope.row)" v-if="user.role == 1">修改</el-button>
-          <el-popconfirm title="确认删除?" @confirm="handleDelete(scope.row) " v-if="user.role == 1">
+          <el-popconfirm title="确认归还?" @confirm="handleDelete(scope.row) " v-if="user.role == 1">
             <template #reference>
-              <el-button type="danger" size="mini" >删除</el-button>
+              <el-button type="danger" size="mini" >归还</el-button>
             </template>
           </el-popconfirm>
           <el-popconfirm title="确认续借(续借一次延长30天)?" @confirm="handlereProlong(scope.row)" v-if="user.role == 2" :disabled="scope.row.prolong == 0">
@@ -126,10 +126,10 @@ export default {
         ElMessage.warning("请选择数据！")
         return
       }
-    //  一个小优化，直接发送这个数组，而不是一个一个的提交删除
+    //  一个小优化，直接发送这个数组，而不是一个一个的提交归还
       request.post("bookwithuser/deleteRecords",this.forms).then(res =>{
         if(res.code === '0'){
-          ElMessage.success("批量删除成功")
+          ElMessage.success("批量归还成功")
           this.load()
         }
         else {
@@ -180,7 +180,7 @@ export default {
       request.post("bookwithuser/deleteRecord",form3).then(res =>{
         console.log(res)
         if(res.code == 0 ){
-          ElMessage.success("删除成功")
+          ElMessage.success("归还成功")
         }
         else
           ElMessage.error(res.msg)

@@ -45,9 +45,9 @@
     <!-- 按钮-->
     <div style="margin: 10px 0;" >
       <el-button type="primary" @click = "add" v-if="user.role == 1">上架</el-button>
-      <el-popconfirm title="确认删除?" @confirm="deleteBatch" v-if="user.role == 1">
+      <el-popconfirm title="确认下架?" @confirm="deleteBatch" v-if="user.role == 1">
         <template #reference>
-          <el-button type="danger" size="mini" >批量删除</el-button>
+          <el-button type="danger" size="mini" >批量下架</el-button>
         </template>
       </el-popconfirm>
     </div>
@@ -73,7 +73,7 @@
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
           <el-button  size="mini" @click ="handleEdit(scope.row)" v-if="user.role == 1">修改</el-button>
-          <el-popconfirm title="确认删除?" @confirm="handleDelete(scope.row.id)" v-if="user.role == 1">
+          <el-popconfirm title="确认下架?" @confirm="handleDelete(scope.row.id)" v-if="user.role == 1">
             <template #reference>
               <el-button type="danger" size="mini" >下架</el-button>
             </template>
@@ -213,10 +213,10 @@ export default {
         ElMessage.warning("请选择数据！")
         return
       }
-      //  一个小优化，直接发送这个数组，而不是一个一个的提交删除
+      //  一个小优化，直接发送这个数组，而不是一个一个的提交下架
       request.post("/book/deleteBatch",this.ids).then(res =>{
         if(res.code === '0'){
-          ElMessage.success("批量删除成功")
+          ElMessage.success("批量下架成功")
           this.load()
         }
         else {
@@ -284,7 +284,7 @@ export default {
       request.delete("book/" + id ).then(res =>{
         console.log(res)
         if(res.code == 0 ){
-          ElMessage.success("删除成功")
+          ElMessage.success("下架成功")
         }
         else
           ElMessage.error(res.msg)

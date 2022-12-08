@@ -9,6 +9,7 @@ import java.util.Date;
 @TableName("lend_record")
 @Data
 public class LendRecord {
+    private Integer id;
     private Integer readerId;
     private String isbn;
     private String bookname;
