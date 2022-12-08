@@ -98,6 +98,12 @@ export default {
 
     getcode(){
 
+      if (this.phone == null){
+        ElMessage.error("获取失败! 请先将个人信息补充完整")
+        this.$router.push("/person")//跳转个人信息界面
+        return;
+      }
+
       let me = this;
       me.isDisabled = true;
       let interval = window.setInterval(function() {
