@@ -97,6 +97,17 @@ public class UserController {
         }
         return Result.error("-1","验证码错误");
     }
+
+    @PutMapping("/update")
+    public Result<?> update(@RequestBody User user){
+        //校验手机号
+        if (RegexUtils.isPhoneInvalid(user.getPhone())) {
+            return Result.error("-1","手机号格式错误");
+        }
+        userMapper.updateById(user);
+        return Result.success();
+    }
+
     @PostMapping("/deleteBatch")
     public  Result<?> deleteBatch(@RequestBody List<Integer> ids){
         userMapper.deleteBatchIds(ids);
