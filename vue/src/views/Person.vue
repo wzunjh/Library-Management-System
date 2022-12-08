@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     update() {
-      request.put("/user", this.form).then(res => {
+      request.put("/user/update", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           ElMessage.success("更新成功")
