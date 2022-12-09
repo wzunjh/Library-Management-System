@@ -68,7 +68,7 @@ public class BookController {
         if(StringUtils.isNotBlank(search3)){
             wrappers.like(Book::getAuthor,search3);
         }
-        wrappers.orderByAsc(Book::getCreateTime);    //按出版时间排序
+        wrappers.orderByDesc(Book::getBorrownum);    //按借阅次数排序
         Page<Book> BookPage =BookMapper.selectPage(new Page<>(pageNum,pageSize), wrappers);
         return Result.success(BookPage);
     }
