@@ -58,18 +58,17 @@ public class BookWithUserController {
         map.put("isbn",BookWithUser.getIsbn());
         map.put("id",BookWithUser.getId());
         BookWithUserMapper.deleteByMap(map);
-        LambdaQueryWrapper<Book> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(Book::getIsbn,BookWithUser.getIsbn());
-        Book book = bookMapper.selectOne(wrapper);
-        book.setStatus("1"); //归还
-        bookMapper.updateById(book);
         LambdaQueryWrapper<LendRecord> wrapper1 = Wrappers.lambdaQuery();
         wrapper1.eq(LendRecord::getReaderId,BookWithUser.getId()).eq(LendRecord::getIsbn,BookWithUser.getIsbn()).eq(LendRecord::getStatus,"0");
         LendRecord lendRecord = lendRecordMapper.selectOne(wrapper1);
         lendRecord.setStatus("1");  //归还
         lendRecord.setReturnTime(date);
         lendRecordMapper.updateById(lendRecord);
-
+        LambdaQueryWrapper<Book> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(Book::getIsbn,BookWithUser.getIsbn());
+        Book book = bookMapper.selectOne(wrapper);
+        book.setStatus("1"); //归还
+        bookMapper.updateById(book);
         return Result.success();
     }
 
