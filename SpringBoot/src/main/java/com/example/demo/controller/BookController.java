@@ -19,13 +19,25 @@ public class BookController {
     BookMapper BookMapper;
 
     @PostMapping
-    public Result<?> save(@RequestBody Book Book){
-        BookMapper.insert(Book);
+    public Result<?> save(@RequestBody Book book){
+        LambdaQueryWrapper<Book> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(Book::getIsbn,book.getIsbn());
+        Book selectOne = BookMapper.selectOne(wrapper);
+        if (selectOne != null){
+            return Result.error("-1","图书编号已存在!");
+        }
+        BookMapper.insert(book);
         return Result.success();
     }
     @PutMapping
-    public  Result<?> update(@RequestBody Book Book){
-        BookMapper.updateById(Book);
+    public  Result<?> update(@RequestBody Book book){
+        LambdaQueryWrapper<Book> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(Book::getIsbn,book.getIsbn()).ne(Book::getId,book.getId());
+        Book selectOne = BookMapper.selectOne(wrapper);
+        if (selectOne != null){
+            return Result.error("-1","图书编号已存在!");
+        }
+        BookMapper.updateById(book);
         return Result.success();
     }
 
