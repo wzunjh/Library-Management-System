@@ -6,7 +6,12 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.commom.Result;
 import com.example.demo.entity.Book;
+import com.example.demo.entity.BookWithUser;
+import com.example.demo.entity.LendRecord;
 import com.example.demo.mapper.BookMapper;
+import com.example.demo.mapper.BookWithUserMapper;
+import com.example.demo.mapper.LendRecordMapper;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,6 +22,12 @@ import java.util.List;
 public class BookController {
     @Resource
     BookMapper BookMapper;
+
+    @Resource
+    LendRecordMapper lendRecordMapper;
+
+    @Resource
+    BookWithUserMapper bookWithUserMapper;
 
     @PostMapping
     public Result<?> save(@RequestBody Book book){
@@ -43,12 +54,34 @@ public class BookController {
 
     //    批量删除
     @PostMapping("/deleteBatch")
+    @Transactional
     public  Result<?> deleteBatch(@RequestBody List<Integer> ids){
+        for (Integer id:ids){
+            LambdaQueryWrapper<Book> wrapper = Wrappers.lambdaQuery();
+            wrapper.eq(Book::getId,id);
+            Book book = BookMapper.selectOne(wrapper);
+            LambdaQueryWrapper<BookWithUser> wrapper1 = Wrappers.lambdaQuery();
+            wrapper1.eq(BookWithUser::getIsbn,book.getIsbn());
+            BookWithUser bookWithUser = bookWithUserMapper.selectOne(wrapper1);
+            if (bookWithUser != null){
+                return Result.error("-1","书籍在借阅中,无法下架");
+            }
+        }
         BookMapper.deleteBatchIds(ids);
         return Result.success();
     }
     @DeleteMapping("/{id}")
+    @Transactional
     public Result<?> delete(@PathVariable Long id){
+        LambdaQueryWrapper<Book> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(Book::getId,id);
+        Book book = BookMapper.selectOne(wrapper);
+        LambdaQueryWrapper<BookWithUser> wrapper1 = Wrappers.lambdaQuery();
+        wrapper1.eq(BookWithUser::getIsbn,book.getIsbn());
+        BookWithUser bookWithUser = bookWithUserMapper.selectOne(wrapper1);
+        if (bookWithUser != null){
+            return Result.error("-1","书籍在借阅中,无法下架");
+        }
         BookMapper.deleteById(id);
         return Result.success();
     }
