@@ -59,7 +59,7 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#iconlend-record "></use>
       </svg>
-      <span>借阅管理</span>
+      <span>借阅记录</span>
     </el-menu-item>
     <el-menu-item index="/lendrecord" v-if="user.role == 2">
       <svg class="icon" aria-hidden="true">
