@@ -271,7 +271,15 @@ export default {
           console.log("in load():" +this.numOfOutDataBook );
         })
       }
-      //
+      request.get("/user/alow/"+this.user.id).then(res=>{
+        if (res.code == 0) {
+          this.flag = true
+        }
+        else {
+          this.flag = false
+        }
+      })
+      //判断是否具有借阅权力
     },
     clear(){
       this.search1 = ""
@@ -378,16 +386,12 @@ export default {
         ElMessage.warning("在您归还逾期书籍前不能再借阅书籍")
         return;
       }
-      request.get("/user/alow/"+this.user.id).then(res=>{
-        if (res.code == 0) {
-            this.flag = true
-        }
-        else {
-          ElMessage.error(res.msg)
-          this.flag = false
-        }
-      })
+
       if(this.flag == false){
+        ElMessage({
+          message: '您没有管理员授予的借阅权',
+          type: 'error',
+        })
         return;
       }
 
