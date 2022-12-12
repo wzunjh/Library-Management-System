@@ -50,17 +50,10 @@ public class BookWithUserController {
     @PostMapping("/deleteRecord")
     @Transactional
     public  Result<?> deleteRecord(@RequestBody BookWithUser BookWithUser){
-        Date date = new java.util.Date();//获取当前时间对象，也可以直接传入Date的对象
         Map<String,Object> map = new HashMap<>();
         map.put("isbn",BookWithUser.getIsbn());
         map.put("id",BookWithUser.getId());
         BookWithUserMapper.deleteByMap(map);
-        LambdaQueryWrapper<LendRecord> wrapper1 = Wrappers.lambdaQuery();
-        wrapper1.eq(LendRecord::getReaderId,BookWithUser.getId()).eq(LendRecord::getIsbn,BookWithUser.getIsbn()).eq(LendRecord::getStatus,"0");
-        LendRecord lendRecord = lendRecordMapper.selectOne(wrapper1);
-        lendRecord.setStatus("1");  //归还
-        lendRecord.setReturnTime(date);
-        lendRecordMapper.updateById(lendRecord);
         LambdaQueryWrapper<Book> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(Book::getIsbn,BookWithUser.getIsbn());
         Book book = bookMapper.selectOne(wrapper);
