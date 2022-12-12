@@ -54,10 +54,11 @@
       <el-table-column prop="address" label="地址" />
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
-          <el-button  size="mini" @click ="handleEdit(scope.row)">编辑</el-button>
+          <el-button  size="mini" @click ="handleEdit(scope.row)">审核/编辑</el-button>
+          <el-button  size="mini" @click ="handleAlow(scope.row.id)" style="margin-left: 10px" type="success">允许借阅</el-button>
           <el-popconfirm title="确认禁用?" @confirm="handleDelete(scope.row.id)">
             <template #reference>
-              <el-button type="danger" size="mini" >禁用</el-button>
+              <el-button type="danger" size="mini" style="margin-top: 10px; margin-left: 50px">账号禁用</el-button>
             </template>
           </el-popconfirm>
         </template>
@@ -214,6 +215,17 @@ export default {
 
     },
 
+    handleAlow(id){
+      request.put("user/" + id ).then(res =>{
+        console.log(res)
+        if(res.code == 0 ){
+          ElMessage.success("授权成功")
+        }
+        else
+          ElMessage.error(res.msg)
+        this.load()
+      })
+    },
 
     handleEdit(row){
       this.form = JSON.parse(JSON.stringify(row))
