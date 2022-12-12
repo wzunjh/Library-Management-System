@@ -389,7 +389,7 @@ export default {
 
       if(this.flag == false){
         ElMessage({
-          message: '您没有管理员授予的借阅权',
+          message: '您没有借阅权限,管理员审核通过后授权',
           type: 'error',
         })
         return;

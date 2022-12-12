@@ -9,7 +9,6 @@ import com.example.demo.entity.Book;
 import com.example.demo.entity.BookWithUser;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.mapper.BookWithUserMapper;
-import com.example.demo.mapper.LendRecordMapper;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
