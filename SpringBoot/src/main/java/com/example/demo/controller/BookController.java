@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.commom.Result;
 import com.example.demo.entity.Book;
 import com.example.demo.entity.BookWithUser;
-import com.example.demo.entity.LendRecord;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.mapper.BookWithUserMapper;
 import com.example.demo.mapper.LendRecordMapper;
@@ -22,9 +21,6 @@ import java.util.List;
 public class BookController {
     @Resource
     BookMapper BookMapper;
-
-    @Resource
-    LendRecordMapper lendRecordMapper;
 
     @Resource
     BookWithUserMapper bookWithUserMapper;

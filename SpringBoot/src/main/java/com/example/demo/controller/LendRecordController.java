@@ -40,7 +40,6 @@ public class LendRecordController {
     }
     @PostMapping("/deleteRecords")
     public Result<?> deleteRecords(@RequestBody List<LendRecord> LendRecords){
-        int len = LendRecords.size();
         for (LendRecord curRecord : LendRecords) {
             Map<String, Object> map = new HashMap<>();
             map.put("isbn", curRecord.getIsbn());

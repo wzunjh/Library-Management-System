@@ -133,7 +133,7 @@ public class UserController {
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,
                               @RequestParam(defaultValue = "") String search){
-        LambdaQueryWrapper<User> wrappers = Wrappers.<User>lambdaQuery();
+        LambdaQueryWrapper<User> wrappers = Wrappers.lambdaQuery();
         if(StringUtils.isNotBlank(search)){
             wrappers.like(User::getNickName,search);
         }
@@ -148,7 +148,7 @@ public class UserController {
                                @RequestParam(defaultValue = "") String search2,
                                @RequestParam(defaultValue = "") String search3,
                                @RequestParam(defaultValue = "") String search4){
-        LambdaQueryWrapper<User> wrappers = Wrappers.<User>lambdaQuery();
+        LambdaQueryWrapper<User> wrappers = Wrappers.lambdaQuery();
         if(StringUtils.isNotBlank(search1)){
             wrappers.like(User::getId,search1);
         }
