@@ -121,7 +121,7 @@ export default {
             ElMessage.error("两次密码输入不一致")
             return
           }
-          if(this.form.role == 1 && this.form.authorize != "1234")
+          if(this.form.role == 1 && this.form.authorize != "2236")
           {
             ElMessage.error("请输入正确的注册码")
             return
