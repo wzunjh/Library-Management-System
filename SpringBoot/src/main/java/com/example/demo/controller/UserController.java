@@ -12,13 +12,13 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.utils.RegexUtils;
 import com.example.demo.utils.SmsUtils;
-import org.springframework.web.bind.annotation.*;
 import com.example.demo.utils.TokenUtils;
-
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -27,9 +27,11 @@ public class UserController {
     @Resource
     UserMapper userMapper;
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @GetMapping("/getcode")
-    public Result<?> getcode(@RequestParam String phone, HttpSession session){
+    public Result<?> getcode(@RequestParam String phone){
 
         //校验手机号
         if (RegexUtils.isPhoneInvalid(phone)) {
@@ -37,7 +39,8 @@ public class UserController {
         }
 
         String code = RandomUtil.randomNumbers(6);  //六位随机验证码
-        session.setAttribute(phone,code); //code存入session
+
+        stringRedisTemplate.opsForValue().set(phone,code,5L, TimeUnit.MINUTES);  //将验证码存入redis，5分钟有效
         SmsUtils.sendSms(phone,code);   //发送验证码
         System.out.println(code);
         return Result.success();
@@ -85,14 +88,16 @@ public class UserController {
         return Result.success();
     }
     @PutMapping
-    public  Result<?> password(@RequestBody User user,HttpSession session){
-        if (session.getAttribute(user.getPhone())==null){
+    public  Result<?> password(@RequestBody User user){
+
+        String code = stringRedisTemplate.opsForValue().get(user.getPhone());  //从redis中取出验证码
+        if (code==null){
             return Result.error("-1","请先获取验证码");
         }
-        String code = session.getAttribute(user.getPhone()).toString();
+
         if (user.getCode().equals(code)){
             userMapper.updateById(user);
-            session.removeAttribute(user.getPhone()); //移除验证码
+            stringRedisTemplate.delete(user.getPhone());
             return Result.success();
         }
         return Result.error("-1","验证码错误");
