@@ -118,6 +118,17 @@ public class UserController {
         userMapper.deleteById(id);
         return Result.success();
     }
+
+    @PutMapping("/{id}")
+    public Result<?> update(@PathVariable Long id){
+        User user = userMapper.selectById(id);
+        if (user == null){
+            return Result.error("-1","授权失败,用户信息错误");
+        }
+        user.setAlow("1");
+        userMapper.updateById(user);
+        return Result.success();
+    }
     @GetMapping
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,
@@ -154,5 +165,15 @@ public class UserController {
         wrappers.orderByAsc(User::getId);   //按编号排序
         Page<User> userPage =userMapper.selectPage(new Page<>(pageNum,pageSize), wrappers);
         return Result.success(userPage);
+    }
+    @GetMapping("/alow/{id}")
+    public Result<?> alow(@PathVariable Long id){
+        LambdaQueryWrapper<User> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(User::getId,id).eq(User::getAlow,"1");
+        User user = userMapper.selectOne(wrapper);
+        if (user == null){
+            return Result.error("-1","您没有管理员授予的借阅权!");
+        }
+        return Result.success();
     }
 }

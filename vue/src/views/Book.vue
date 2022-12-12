@@ -378,6 +378,19 @@ export default {
         ElMessage.warning("在您归还逾期书籍前不能再借阅书籍")
         return;
       }
+      request.get("/user/alow/"+this.user.id).then(res=>{
+        if (res.code == 0) {
+            this.flag = true
+        }
+        else {
+          ElMessage.error(res.msg)
+          this.flag = false
+        }
+      })
+      if(this.flag == false){
+        return;
+      }
+
       this.form.status = "0"
       this.form.id = id
       this.form.borrownum = bn+1
@@ -490,6 +503,7 @@ export default {
   data() {
     return {
       phone:'',
+      flag:'',
       form: {},
       form2:{},
       form3:{},
