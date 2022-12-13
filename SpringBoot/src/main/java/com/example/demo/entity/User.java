@@ -20,8 +20,10 @@ public class User {
     @TableField(exist = false)  //表中没有token不会报错仍能编译运行
     private String token;
     private Integer role;
-    @TableField(exist = false)  //表中没有code不会报错仍能编译运行
+    @TableField(exist = false)
     private String code;
+    @TableField(exist = false)
+    private String confirm;
     private String alow;   //是否允许借阅的指标
 
 }
