@@ -23,6 +23,7 @@
 import * as echarts from 'echarts'
 import {ElMessage} from "element-plus";
 import request from "../utils/request";
+import router from "@/router";
 
 export default {
   data() {
@@ -37,7 +38,11 @@ export default {
     }
   },
   created() {
-
+    let userJson = sessionStorage.getItem("user")
+    if(!userJson)
+    {
+      router.push("/login")
+    }
   },
   mounted() {
     this.circleTimer()

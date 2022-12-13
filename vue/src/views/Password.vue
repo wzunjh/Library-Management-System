@@ -44,6 +44,7 @@
 <script>
 import request from "../utils/request";
 import {ElMessage} from "element-plus";
+import router from "@/router";
 
 export default {
   name: "Password",
@@ -88,6 +89,11 @@ export default {
     }
   },
   created() {
+    let userJson = sessionStorage.getItem("user")
+    if(!userJson)
+    {
+      router.push("/login")
+    }
     let user = JSON.parse(sessionStorage.getItem("user"))
     this.phone= user.phone
     this.form2.id = user.id

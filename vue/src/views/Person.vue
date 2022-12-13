@@ -37,6 +37,7 @@
 <script>
 import request from "@/utils/request";
 import {ElMessage} from "element-plus";
+import router from "@/router";
 
 export default {
   name: "Person",
@@ -46,6 +47,11 @@ export default {
     }
   },
   created() {
+    let userJson = sessionStorage.getItem("user")
+    if(!userJson)
+    {
+      router.push("/login")
+    }
     let str = sessionStorage.getItem("user") || "{}"
     this.form = JSON.parse(str)
   },

@@ -122,10 +122,16 @@
 import request from "../utils/request";
 import {ElMessage} from "element-plus";
 import { defineComponent, reactive, toRefs } from 'vue'
+import router from "@/router";
 
 export default defineComponent({
 
   created(){
+    let userJson = sessionStorage.getItem("user")
+    if(!userJson)
+    {
+      router.push("/login")
+    }
     this.load()
     let userStr = sessionStorage.getItem("user") ||"{}"
     this.user = JSON.parse(userStr)

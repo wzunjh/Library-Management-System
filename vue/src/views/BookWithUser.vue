@@ -109,10 +109,16 @@
 import request from "../utils/request";
 import {ElMessage} from "element-plus";
 import moment from "moment";
+import router from "@/router";
 export default {
   created(){
     let userStr = sessionStorage.getItem("user") ||"{}"
     this.user = JSON.parse(userStr)
+    let userJson = sessionStorage.getItem("user")
+    if(!userJson)
+    {
+      router.push("/login")
+    }
     this.load()
   },
   name: 'bookwithuser',
