@@ -41,9 +41,9 @@
         </div>
       </el-form-item>
       <el-form-item >
-        <el-button type="primary" style=" width: 100%" @click="register">注 册</el-button>
+        <el-button type="primary" style=" width: 100%;font-size: 20px"  @click="register">注 册</el-button>
       </el-form-item>
-      <el-form-item><el-button type="text" @click="$router.push('/login')">前往登录>> </el-button></el-form-item>
+      <el-form-item><el-button type="text" style="font-size: 16px" @click="$router.push('/login')">前往登录>> </el-button></el-form-item>
     </el-form>
 </div>
 
