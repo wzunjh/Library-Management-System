@@ -55,6 +55,11 @@ const routes = [
     name: 'Register',
     component: () => import("@/views/Register")
   },
+  {
+    path: '/forget',
+    name: 'Forget',
+    component: () => import("@/views/Forget")
+  },
 
 
 ]
