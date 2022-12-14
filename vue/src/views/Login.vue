@@ -27,7 +27,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="text" style="font-size: 16px;width: 20%; color: #ee7463" @click="$router.push('/forget')">忘记密码?</el-button>
-        <el-button type="text" style="font-size: 16px;margin-left: 130px" @click="$router.push('/register')">没有账号?前往注册</el-button>
+        <el-button type="text" style="font-size: 16px;margin-left: 139px" @click="$router.push('/register')">没有账号?前往注册</el-button>
       </el-form-item>
     </el-form>
 </div>
