@@ -15,7 +15,13 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icondashboard "></use>
       </svg>
-      <span>展示板</span>
+      <span>数据可视化</span>
+    </el-menu-item>
+    <el-menu-item index="/push" >
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconvisit "></use>
+      </svg>
+      <span>每周推荐</span>
     </el-menu-item>
     <el-sub-menu index="2" text-color="#fff">
       <template #title>
