@@ -72,7 +72,7 @@ public class UserController {
     @PostMapping
     public Result<?> save(@RequestBody User user){
         if(user.getPassword() == null){
-            user.setPassword("abc123456");
+            user.setPassword("123456");
         }
         userMapper.insert(user);
         return Result.success();
