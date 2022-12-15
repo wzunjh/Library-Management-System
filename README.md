@@ -1,17 +1,5 @@
 # 图书馆管理系统（library-system）
 
-
-
-## 本地快捷预览项目
-
-第一步：运行 sql 文件夹下的`springboot-vue.sql`，创建`springboot-vue`数据库
-
-第二步：双击 run 文件夹下的`start.cmd`，弹出的dos窗口不要关闭
-
-第三步：浏览器访问`localhost:9090`，测试账号需要自己插入到数据库中
-
-
-
 ## 主要技术
 
 SpringBoot、Mybatis-Plus、MySQL、Vue3、ElementPlus等
