@@ -35,7 +35,7 @@ public class ForgetController {
         String phone = user.getPhone();
         //校验手机号
         if (RegexUtils.isPhoneInvalid(phone)) {
-            return Result.error("-1","手机号错误");
+            return Result.error("-1","手机号错误或未绑定手机号");
         }
 
         String code = RandomUtil.randomNumbers(6);  //六位随机验证码
