@@ -306,14 +306,6 @@ export default {
       })
     },
     handlereturn(id,isbn,bn){
-      // (this.isbnArray.indexOf(scope.row.isbn)) == -1
-      // for(let i=0; i<this.numOfOutDataBook; i++){
-      //   if(this.outDateBook[i].isbn == isbn){
-      //     this.numOfOutDataBook = this.numOfOutDataBook -1;
-      //     console.log("in handlereturn: " + this.numOfOutDataBook);
-      //     break;
-      //   }
-      // }
       this.form.status = "1"
       this.form.id = id
       request.put("/book",this.form).then(res =>{
@@ -353,28 +345,6 @@ export default {
         })
       //
       })
-      // this.form3.isbn = isbn
-      // this.form3.readerId = this.user.id
-      // let endDate = moment(new Date()).format("yyyy-MM-DD HH:mm:ss")
-      // this.form3.returnTime = endDate
-      // this.form3.status = "1"
-      // console.log(bn)
-      // this.form3.borrownum = bn
-      // request.put("/LendRecord1/",this.form3).then(res =>{
-      //   console.log(res)
-      // })
-      // let form3 ={};
-      // form3.isbn = isbn;
-      // form3.bookName = name;
-      // form3.nickName = this.user.username;
-      // form3.id = this.user.id;
-      // form3.lendtime = endDate;
-      // form3.deadtime = endDate;
-      // form3.prolong  = 1;
-      // request.post("/bookwithuser/deleteRecord",form3).then(res =>{
-      //   console.log(res)
-      //   this.load()
-      // })
     },
     handlelend(id,isbn,name,bn){
 
