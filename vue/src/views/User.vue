@@ -189,7 +189,7 @@ export default {
     },
     save(){
       if(this.form.id){
-        request.put("/user",this.form).then(res =>{
+        request.put("/user/update",this.form).then(res =>{
           console.log(res)
           if(res.code == 0){
             ElMessage({
