@@ -130,12 +130,15 @@ public class UserController {
         if (user == null){
             return Result.error("-1","授权失败,用户信息错误");
         }
+        if(user.getAlow() == null){
+            user.setAlow("1");
+            userMapper.updateById(user);
+            return Result.success();
+        }
         if (user.getAlow().equals("1")){
             return Result.error("-1","该用户已有借阅权限");
         }
-        user.setAlow("1");
-        userMapper.updateById(user);
-        return Result.success();
+        return Result.error("-1","服务器错误");
     }
     @GetMapping
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
