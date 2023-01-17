@@ -45,3 +45,9 @@ library-serve
 │              └─service		// 业务层
 └─resources	// maven资源配置
 ```
+###前端启动
+```shell
+npm install  #安装所需依赖
+npm run serve  # 启动前端项目
+npm build      # 打包前端项目(dist)部署
+```
