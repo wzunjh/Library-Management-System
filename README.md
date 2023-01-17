@@ -45,9 +45,14 @@ library-serve
 │              └─service		// 业务层
 └─resources	// maven资源配置
 ```
-###前端启动
+### 前端启动
 ```shell
 npm install  #安装所需依赖
 npm run serve  # 启动前端项目
 npm build      # 打包前端项目(dist)部署
 ```
+### 后端启动
+1.运行根目录中的sql文件，测试连接数据库
+2.启动本地redis服务(window或者docker部署，可选)
+3.添加阿里云短信服务Key和pwd（可选）
+4.运行springboot启动类
