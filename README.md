@@ -59,3 +59,10 @@ npm build      # 打包前端项目(dist)部署
 3.添加阿里云短信服务Key和pwd（可选）
 
 4.运行springboot启动类
+
+### 部分页面展示
+| ![输入图片说明](vue/public/%E5%9B%BE%E7%89%873.png)  | ![输入图片说明](vue/public/%E5%9B%BE%E7%89%876.png)  | ![输入图片说明](vue/public/%E5%9B%BE%E7%89%87.png)  |
+|---|---|---|
+| ![输入图片说明](vue/public/%E5%9B%BE%E7%89%871.png)  |  ![输入图片说明](vue/public/%E5%9B%BE%E7%89%872.png) | ![输入图片说明](vue/public/%E5%9B%BE%E7%89%878.png)  |
+|   | ![输入图片说明](vue/public/%E5%9B%BE%E7%89%879.png)  |   |
+
