@@ -41,7 +41,7 @@ public class ForgetController {
         String code = RandomUtil.randomNumbers(6);  //六位随机验证码
 
         stringRedisTemplate.opsForValue().set(phone,code,5L, TimeUnit.MINUTES);  //将验证码存入redis，5分钟有效
-        SmsUtils.sendSms(phone,code);   //发送验证码
+        SmsUtils.sendSms(phone,code);   //发送验证码,初次启动会报错因为没有此类方法,请到阿里云配置属于自己的短信密钥
         System.out.println(code);
         return Result.success();
     }

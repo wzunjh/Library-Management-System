@@ -12,7 +12,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 
 		System.out.println("\n");
-		System.out.println("SpringBoot项目启动成功.........");
+		System.out.println("SpringBoot is starting......");
 
 	}
 }
