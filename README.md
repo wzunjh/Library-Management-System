@@ -60,7 +60,7 @@ npm build      # 打包前端项目(dist)部署
 
 4.运行springboot启动类
 
-5.当报错显示阿里云短信请求不存在时，请查看Issues解决问题 [点击这里](https://github.com/wzunjh/Library-Management-System/issues/1)
+5.当报错显示阿里云短信请求不存在时(可选择删除此功能)，请查看Issues解决问题 [点击这里](https://github.com/wzunjh/Library-Management-System/issues/1) 
 
 ### 部分页面展示
 | ![输入图片说明](vue/public/%E5%9B%BE%E7%89%873.png)  | ![输入图片说明](vue/public/%E5%9B%BE%E7%89%876.png)  | ![输入图片说明](vue/public/%E5%9B%BE%E7%89%87.png)  |
