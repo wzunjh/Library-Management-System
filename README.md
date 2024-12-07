@@ -56,7 +56,7 @@ npm build      # 打包前端项目(dist)部署
 
 2.启动本地redis服务(window的redis应用或者docker部署，用于短信验证码功能)
 
-3.添加阿里云短信服务Key和pwd（短信服务可选，不使用请注释相关代码，否则可能报错）
+3.添加阿里云短信服务Key和pwd [（短信服务可选，不使用请注释相关代码，否则可能报错）](https://github.com/wzunjh/Library-Management-System/issues/1)
 
 4.运行springboot启动类
 
