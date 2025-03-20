@@ -110,6 +110,9 @@ library-serve
 |---|---|---|
 | <img src="vue/public/图片3.png" alt="管理员登录">  | <img src="vue/public/图片6.png" alt="管理员主页">   | <img src="vue/public/图片.png" alt="图书列表"> |
 | <img src="vue/public/图片1.png" alt="读者登录"> | <img src="vue/public/图片2.png" alt="读者主页">  | <img src="vue/public/图片8.png" alt="个人借阅">  |
-|   <img src="vue/public/图片9.png" alt="个人信息">  |
+
+![lendrecord_edit](https://github.com/user-attachments/assets/e00f0599-4b22-4e3d-bf33-165546bdb63d)
+
+<img src="vue/public/图片9.png" alt="个人信息">
 
 
