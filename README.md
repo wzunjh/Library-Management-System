@@ -1,6 +1,6 @@
 # 图书馆管理系统 (library-system)
 
-一个基于 SpringBoot、Mybatis-Plus、MySQL、Vue3 和 ElementPlus 构建的完整图书馆管理系统。
+一个基于 SpringBoot、Mybatis-Plus、MySQL、Vue3、ElementPlus、Redis 和 Docker容器 构建的完整图书馆管理系统。
 
 ## ✨ 技术栈
 
